@@ -106,4 +106,14 @@ class SortImplResolverTest extends \PHPUnit_Framework_TestCase
         $sort = $sorts[1];
         $this->assertEquals('b', $sort->getProperty());
     }
+
+    /**
+     * @test
+     */
+    public function resolveSilently()
+    {
+        $sorts = $this->resolver->resolveSilently($this->createServerRequest('GET'));
+        $this->assertTrue(is_array($sorts));
+        $this->assertCount(0, $sorts);
+    }
 }

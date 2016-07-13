@@ -2,6 +2,7 @@
 namespace Heneke\Web\Common\Request\Impl;
 
 use Heneke\Web\Common\Request\SortInterface;
+use Heneke\Web\Common\Request\UnresolvableException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SortImplResolver extends AbstractResolver
@@ -24,6 +25,7 @@ class SortImplResolver extends AbstractResolver
 
     /**
      * @param ServerRequestInterface $serverRequest
+     * @throws UnresolvableException
      * @return SortInterface[]
      */
     public function resolve(ServerRequestInterface $serverRequest)
@@ -38,5 +40,18 @@ class SortImplResolver extends AbstractResolver
             $sorts[] = SortImpl::fromString($value);
         }
         return $sorts;
+    }
+
+    /**
+     * @param ServerRequestInterface $serverRequest
+     * @return SortInterface[]
+     */
+    public function resolveSilently(ServerRequestInterface $serverRequest)
+    {
+        try {
+            return $this->resolve($serverRequest);
+        } catch (UnresolvableException $e) {
+            return [];
+        }
     }
 }
