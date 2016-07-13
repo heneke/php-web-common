@@ -1,9 +1,7 @@
 <?php
 namespace Heneke\Web\Common\Request\Impl;
 
-use GuzzleHttp\Psr7\ServerRequest;
-
-class SortImplResolverTest extends \PHPUnit_Framework_TestCase
+class SortImplResolverTest extends AbstractResolverTest
 {
 
     private $parameter = 'sort';
@@ -19,18 +17,6 @@ class SortImplResolverTest extends \PHPUnit_Framework_TestCase
     public function before()
     {
         $this->resolver = new SortImplResolver($this->parameter);
-    }
-
-    private function createServerRequest($method, array $queryParams = null, array $postParams = null)
-    {
-        $r = new ServerRequest($method, '/');
-        if ($queryParams != null) {
-            $r = $r->withQueryParams($queryParams);
-        }
-        if ($postParams != null) {
-            $r = $r->withParsedBody($postParams);
-        }
-        return $r;
     }
 
     /**
