@@ -4,8 +4,8 @@ namespace Heneke\Web\Common\Request;
 class PageableResolverTest extends AbstractResolverTest
 {
 
-    private $defaultPage = 1;
-    private $defaultSize = 10;
+    private $defaultPage = 23;
+    private $defaultSize = 33;
 
     private $parameterPage = 'p';
     private $parameterSize = 's';
@@ -76,5 +76,29 @@ class PageableResolverTest extends AbstractResolverTest
         $page = [7, 8];
         $size = 22;
         $this->resolver->resolveWithDefault($this->createServerRequest('GET', [$this->parameterPage => $page, $this->parameterSize => $size]));
+    }
+
+    /**
+     * @test
+     */
+    public function resolveWithDefaultPage()
+    {
+        $size = 33;
+        $pageable = $this->resolver->resolveWithDefault($this->createServerRequest('GET', [$this->parameterSize => $size]));
+        $this->assertNotNull($pageable);
+        $this->assertEquals($size, $pageable->getPageSize());
+        $this->assertEquals($this->defaultPage, $pageable->getPageNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function resolveWithDefaultSize()
+    {
+        $page = 44;
+        $pageable = $this->resolver->resolveWithDefault($this->createServerRequest('GET', [$this->parameterPage => $page]));
+        $this->assertNotNull($pageable);
+        $this->assertEquals($page, $pageable->getPageNumber());
+        $this->assertEquals($this->defaultSize, $pageable->getPageSize());
     }
 }

@@ -46,9 +46,11 @@ class PageableResolver extends AbstractResolver
     }
 
     /**
+     * Resolves the Pageable from the given server request. Fails if any parameters are missing.
+     *
      * @param ServerRequestInterface $serverRequest
-     * @throws UnresolvableException
-     * @throws BadRequestException
+     * @throws UnresolvableException if any parameter is missing
+     * @throws BadRequestException if request parameters are not scalar
      * @return PageableInterface
      */
     public function resolve(ServerRequestInterface $serverRequest)
@@ -68,16 +70,30 @@ class PageableResolver extends AbstractResolver
     }
 
     /**
+     * Resolves the Pageable from the given server request, using the default values if any parameter is missing.
+     *
      * @param ServerRequestInterface $serverRequest
-     * @throws BadRequestException
+     * @throws BadRequestException if request parameters are not scalar
      * @return PageableInterface
      */
     public function resolveWithDefault(ServerRequestInterface $serverRequest)
     {
-        try {
-            return $this->resolve($serverRequest);
-        } catch (UnresolvableException $e) {
-            return $this->default;
+        $page = $this->resolveParameterValueSilently($this->parameterPage, $serverRequest);
+        if (is_array($page)) {
+            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
         }
+        if($page === null) {
+            $page = $this->default->getPageNumber();
+        }
+        $size = $this->resolveParameterValueSilently($this->parameterSize, $serverRequest);
+        if (is_array($size)) {
+            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
+        }
+        if($size === null) {
+            $size = $this->default->getPageSize();
+        }
+
+        $sorting = $this->sortResolver->resolveSilently($serverRequest);
+        return new PageableRequest($page, $size, $sorting);
     }
 }

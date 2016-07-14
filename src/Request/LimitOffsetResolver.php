@@ -80,14 +80,14 @@ class LimitOffsetResolver extends AbstractResolver
         if (is_array($limit)) {
             throw new BadRequestException("Parameter '{$this->parameterLimit}' only supports scalar values!");
         }
-        if ($limit == null) {
+        if ($limit === null) {
             $limit = $this->default->getLimit();
         }
         $offset = $this->resolveParameterValueSilently($this->parameterOffset, $serverRequest);
         if (is_array($offset)) {
             throw new BadRequestException("Parameter '{$this->parameterOffset}' only supports scalar values!");
         }
-        if ($offset == null) {
+        if ($offset === null) {
             $offset = $this->default->getOffset();
         }
 
