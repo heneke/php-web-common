@@ -1,13 +1,13 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-class SortImplResolverTest extends AbstractResolverTest
+class SortResolverTest extends AbstractResolverTest
 {
 
     private $parameter = 'sort';
 
     /**
-     * @var SortImplResolver
+     * @var SortResolver
      */
     private $resolver;
 
@@ -16,7 +16,7 @@ class SortImplResolverTest extends AbstractResolverTest
      */
     public function before()
     {
-        $this->resolver = new SortImplResolver($this->parameter);
+        $this->resolver = new SortResolver($this->parameter);
     }
 
     /**

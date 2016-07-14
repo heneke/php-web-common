@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
 use GuzzleHttp\Psr7\ServerRequest;
 

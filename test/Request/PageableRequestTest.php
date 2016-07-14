@@ -1,7 +1,7 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-class PageRequestTest extends \PHPUnit_Framework_TestCase
+class PageableRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -10,7 +10,7 @@ class PageRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function offset($pageNumber, $pageSize, $expectedOffset)
     {
-        $pr = new PageableImpl($pageNumber, $pageSize);
+        $pr = new PageableRequest($pageNumber, $pageSize);
         $this->assertEquals($pageNumber, $pr->getPageNumber());
         $this->assertEquals($pageSize, $pr->getPageSize());
         $this->assertEquals($expectedOffset, $pr->getOffset());

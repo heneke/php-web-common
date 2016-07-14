@@ -1,8 +1,6 @@
 <?php
 namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\Impl\AbstractResolver;
-use Heneke\Web\Common\Request\Impl\SortImplResolver;
 use Psr\Http\Message\ServerRequestInterface;
 
 class LimitOffsetResolver extends AbstractResolver
@@ -14,7 +12,7 @@ class LimitOffsetResolver extends AbstractResolver
     private $default;
 
     /**
-     * @var SortImplResolver
+     * @var SortResolver
      */
     private $sortResolver;
 
@@ -28,7 +26,7 @@ class LimitOffsetResolver extends AbstractResolver
      */
     private $parameterOffset;
 
-    public function __construct(LimitOffsetInterface $default, SortImplResolver $sortResolver, $parameterLimit = 'limit', $parameterOffset = 'offset')
+    public function __construct(LimitOffsetInterface $default, SortResolver $sortResolver, $parameterLimit = 'limit', $parameterOffset = 'offset')
     {
         if (!$parameterLimit) {
             throw new \InvalidArgumentException('Parameter for limit required!');

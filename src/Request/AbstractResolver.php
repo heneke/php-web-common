@@ -1,7 +1,6 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\UnresolvableException;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractResolver

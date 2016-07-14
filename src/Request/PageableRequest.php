@@ -1,10 +1,7 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\PageableInterface;
-use Heneke\Web\Common\Request\SortInterface;
-
-class PageableImpl implements PageableInterface
+class PageableRequest implements PageableInterface
 {
 
     /**
@@ -64,7 +61,7 @@ class PageableImpl implements PageableInterface
      */
     public function next()
     {
-        return new PageableImpl($this->pageNumber + 1, $this->pageSize);
+        return new PageableRequest($this->pageNumber + 1, $this->pageSize);
     }
 
     /**
@@ -73,7 +70,7 @@ class PageableImpl implements PageableInterface
     public function previousOrFirst()
     {
         $previousOrFirstPageNumber = $this->pageNumber == 1 ? 1 : $this->pageNumber - 1;
-        return new PageableImpl($previousOrFirstPageNumber, $this->pageSize);
+        return new PageableRequest($previousOrFirstPageNumber, $this->pageSize);
     }
 
     /**

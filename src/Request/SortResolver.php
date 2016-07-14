@@ -1,11 +1,9 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\SortInterface;
-use Heneke\Web\Common\Request\UnresolvableException;
 use Psr\Http\Message\ServerRequestInterface;
 
-class SortImplResolver extends AbstractResolver
+class SortResolver extends AbstractResolver
 {
 
     /**
@@ -34,10 +32,10 @@ class SortImplResolver extends AbstractResolver
         $sorts = [];
         if (is_array($value)) {
             foreach ($value as $input) {
-                $sorts[] = SortImpl::fromString($input);
+                $sorts[] = SortRequest::fromString($input);
             }
         } else {
-            $sorts[] = SortImpl::fromString($value);
+            $sorts[] = SortRequest::fromString($value);
         }
         return $sorts;
     }

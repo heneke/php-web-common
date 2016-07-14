@@ -1,9 +1,7 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\SortInterface;
-
-class SortImplTest extends \PHPUnit_Framework_TestCase
+class SortRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -12,7 +10,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
     public function ctorWithoutDirection()
     {
         $prop = 'prop';
-        $sort = new SortImpl($prop);
+        $sort = new SortRequest($prop);
         $this->assertEquals($prop, $sort->getProperty());
         $this->assertEquals(SortInterface::DIR_ASC, $sort->getDirection());
     }
@@ -23,7 +21,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
     public function ctorWithDirection()
     {
         $prop = 'prop';
-        $sort = new SortImpl($prop, SortInterface::DIR_DESC);
+        $sort = new SortRequest($prop, SortInterface::DIR_DESC);
         $this->assertEquals($prop, $sort->getProperty());
         $this->assertEquals(SortInterface::DIR_DESC, $sort->getDirection());
     }
@@ -35,7 +33,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
      */
     public function ctorWithouProperty()
     {
-        new SortImpl('');
+        new SortRequest('');
     }
 
     /**
@@ -45,7 +43,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
      */
     public function ctorWithUnsupportedDirection()
     {
-        new SortImpl('prop', 'invalid');
+        new SortRequest('prop', 'invalid');
     }
 
     /**
@@ -55,7 +53,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
     {
         $prop = 'prop';
         $input = " {$prop}  ";
-        $sort = SortImpl::fromString($input);
+        $sort = SortRequest::fromString($input);
         $this->assertEquals($prop, $sort->getProperty());
         $this->assertEquals(SortInterface::DIR_ASC, $sort->getDirection());
     }
@@ -68,7 +66,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
         $prop = 'prop';
         $dir = 'DesC';
         $input = "   {$prop}   $dir  ";
-        $sort = SortImpl::fromString($input);
+        $sort = SortRequest::fromString($input);
         $this->assertEquals($prop, $sort->getProperty());
         $this->assertEquals(strtoupper($dir), $sort->getDirection());
     }
@@ -80,7 +78,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
      */
     public function fromStringNoInput()
     {
-        SortImpl::fromString('');
+        SortRequest::fromString('');
     }
 
     /**
@@ -90,7 +88,7 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
      */
     public function fromStringEmpty()
     {
-        SortImpl::fromString('    ');
+        SortRequest::fromString('    ');
     }
 
     /**
@@ -100,6 +98,6 @@ class SortImplTest extends \PHPUnit_Framework_TestCase
      */
     public function fromStringTooLarge()
     {
-        SortImpl::fromString('A B C');
+        SortRequest::fromString('A B C');
     }
 }

@@ -1,12 +1,9 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\BadRequestException;
-use Heneke\Web\Common\Request\PageableInterface;
-use Heneke\Web\Common\Request\UnresolvableException;
 use Psr\Http\Message\ServerRequestInterface;
 
-class PageableImplResolver extends AbstractResolver
+class PageableResolver extends AbstractResolver
 {
     /**
      * @var PageableInterface
@@ -14,7 +11,7 @@ class PageableImplResolver extends AbstractResolver
     private $default;
 
     /**
-     * @var SortImplResolver
+     * @var SortResolver
      */
     private $sortResolver;
 
@@ -30,7 +27,7 @@ class PageableImplResolver extends AbstractResolver
      */
     private $parameterSize;
 
-    public function __construct(PageableInterface $default, SortImplResolver $sortResolver, $parameterPage = 'page', $parameterSize = 'size')
+    public function __construct(PageableInterface $default, SortResolver $sortResolver, $parameterPage = 'page', $parameterSize = 'size')
     {
         if (!$parameterPage) {
             throw new \InvalidArgumentException('Parameter for page required!');
@@ -67,7 +64,7 @@ class PageableImplResolver extends AbstractResolver
 
         $sorting = $this->sortResolver->resolveSilently($serverRequest);
 
-        return new PageableImpl($page, $size, $sorting);
+        return new PageableRequest($page, $size, $sorting);
     }
 
     /**

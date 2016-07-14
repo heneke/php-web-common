@@ -1,7 +1,7 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-class PageableImplResolverTest extends AbstractResolverTest
+class PageableResolverTest extends AbstractResolverTest
 {
 
     private $defaultPage = 1;
@@ -11,7 +11,7 @@ class PageableImplResolverTest extends AbstractResolverTest
     private $parameterSize = 's';
 
     /**
-     * @var PageableImplResolver
+     * @var PageableResolver
      */
     private $resolver;
 
@@ -20,7 +20,7 @@ class PageableImplResolverTest extends AbstractResolverTest
      */
     public function before()
     {
-        $this->resolver = new PageableImplResolver(new PageableImpl($this->defaultPage, $this->defaultSize), new SortImplResolver(), $this->parameterPage, $this->parameterSize);
+        $this->resolver = new PageableResolver(new PageableRequest($this->defaultPage, $this->defaultSize), new SortResolver(), $this->parameterPage, $this->parameterSize);
     }
 
     /**

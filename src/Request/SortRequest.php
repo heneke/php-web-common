@@ -1,9 +1,7 @@
 <?php
-namespace Heneke\Web\Common\Request\Impl;
+namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\SortInterface;
-
-class SortImpl implements SortInterface
+class SortRequest# implements SortInterface
 {
 
     /**
@@ -37,8 +35,8 @@ class SortImpl implements SortInterface
     /**
      * Converts the input string
      *
-     * @param $input the string, e.g. the request parameter value
-     * @return SortImpl
+     * @param $input string the string, e.g. the request parameter value
+     * @return SortRequest
      */
     public static function fromString($input)
     {
@@ -53,9 +51,9 @@ class SortImpl implements SortInterface
         } else if (count($tokens) > 2) {
             throw new \InvalidArgumentException('Input is too large!');
         } else if (count($tokens) == 1) {
-            return new SortImpl($tokens[0]);
+            return new SortRequest($tokens[0]);
         } else {
-            return new SortImpl($tokens[0], strtoupper($tokens[1]));
+            return new SortRequest($tokens[0], strtoupper($tokens[1]));
         }
     }
 

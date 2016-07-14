@@ -1,9 +1,6 @@
 <?php
 namespace Heneke\Web\Common\Request;
 
-use Heneke\Web\Common\Request\Impl\AbstractResolverTest;
-use Heneke\Web\Common\Request\Impl\SortImplResolver;
-
 class LimitOffsetResolverTest extends AbstractResolverTest
 {
 
@@ -23,7 +20,7 @@ class LimitOffsetResolverTest extends AbstractResolverTest
      */
     public function before()
     {
-        $this->resolver = new LimitOffsetResolver(new LimitOffsetRequest($this->defaultLimit, $this->defaultOffset), new SortImplResolver(), $this->parameterLimit, $this->parameterOffset);
+        $this->resolver = new LimitOffsetResolver(new LimitOffsetRequest($this->defaultLimit, $this->defaultOffset), new SortResolver(), $this->parameterLimit, $this->parameterOffset);
     }
 
     /**
