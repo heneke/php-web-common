@@ -23,4 +23,13 @@ abstract class AbstractResolver
 
         throw new UnresolvableException("Request does not contain parameter '{$parameter}'!");
     }
+
+    protected function resolveParameterValueSilently($parameter, ServerRequestInterface $serverRequest)
+    {
+        try {
+            return $this->resolveParameterValue($parameter, $serverRequest);
+        } catch (UnresolvableException $e) {
+            return null;
+        }
+    }
 }
