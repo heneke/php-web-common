@@ -12,9 +12,9 @@ class LimitOffsetResolver extends AbstractResolver
     private $default;
 
     /**
-     * @var SortResolver
+     * @var SortableResolver
      */
-    private $sortResolver;
+    private $sortableResolver;
 
     /**
      * @var string
@@ -26,7 +26,7 @@ class LimitOffsetResolver extends AbstractResolver
      */
     private $parameterOffset;
 
-    public function __construct(LimitOffsetInterface $default, SortResolver $sortResolver, $parameterLimit = 'limit', $parameterOffset = 'offset')
+    public function __construct(LimitOffsetInterface $default, SortableResolver $sortableResolver, $parameterLimit = 'limit', $parameterOffset = 'offset')
     {
         if (!$parameterLimit) {
             throw new \InvalidArgumentException('Parameter for limit required!');
@@ -39,7 +39,7 @@ class LimitOffsetResolver extends AbstractResolver
         }
 
         $this->default = $default;
-        $this->sortResolver = $sortResolver;
+        $this->sortableResolver = $sortableResolver;
         $this->parameterLimit = $parameterLimit;
         $this->parameterOffset = $parameterOffset;
     }
@@ -63,8 +63,8 @@ class LimitOffsetResolver extends AbstractResolver
             throw new BadRequestException("Parameter '{$this->parameterOffset}' only supports scalar values!");
         }
 
-        $sorting = $this->sortResolver->resolveSilently($serverRequest);
-        return new LimitOffsetRequest($limit, $offset, $sorting);
+        $sortable = $this->sortableResolver->resolveSilently($serverRequest);
+        return new LimitOffsetRequest($limit, $offset, $sortable);
     }
 
     /**
@@ -91,7 +91,7 @@ class LimitOffsetResolver extends AbstractResolver
             $offset = $this->default->getOffset();
         }
 
-        $sorting = $this->sortResolver->resolveSilently($serverRequest);
-        return new LimitOffsetRequest($limit, $offset, $sorting);
+        $sortable = $this->sortableResolver->resolveSilently($serverRequest);
+        return new LimitOffsetRequest($limit, $offset, $sortable);
     }
 }

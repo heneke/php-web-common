@@ -13,7 +13,7 @@ class PageableResolver extends AbstractResolver
     /**
      * @var SortResolver
      */
-    private $sortResolver;
+    private $sortableResolver;
 
     /**
      * The request parameter to resolve the page
@@ -27,7 +27,7 @@ class PageableResolver extends AbstractResolver
      */
     private $parameterSize;
 
-    public function __construct(PageableInterface $default, SortResolver $sortResolver, $parameterPage = 'page', $parameterSize = 'size')
+    public function __construct(PageableInterface $default, SortableResolver $sortableResolver, $parameterPage = 'page', $parameterSize = 'size')
     {
         if (!$parameterPage) {
             throw new \InvalidArgumentException('Parameter for page required!');
@@ -40,7 +40,7 @@ class PageableResolver extends AbstractResolver
         }
 
         $this->default = $default;
-        $this->sortResolver = $sortResolver;
+        $this->sortableResolver = $sortableResolver;
         $this->parameterPage = $parameterPage;
         $this->parameterSize = $parameterSize;
     }
@@ -64,9 +64,9 @@ class PageableResolver extends AbstractResolver
             throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
         }
 
-        $sorting = $this->sortResolver->resolveSilently($serverRequest);
+        $sortable = $this->sortableResolver->resolveSilently($serverRequest);
 
-        return new PageableRequest($page, $size, $sorting);
+        return new PageableRequest($page, $size, $sortable);
     }
 
     /**
@@ -93,7 +93,7 @@ class PageableResolver extends AbstractResolver
             $size = $this->default->getPageSize();
         }
 
-        $sorting = $this->sortResolver->resolveSilently($serverRequest);
-        return new PageableRequest($page, $size, $sorting);
+        $sortable = $this->sortableResolver->resolveSilently($serverRequest);
+        return new PageableRequest($page, $size, $sortable);
     }
 }

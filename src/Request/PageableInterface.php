@@ -40,9 +40,9 @@ interface PageableInterface
     public function previousOrFirst();
 
     /**
-     * Returns the sorting options if any
+     * Returns the sortable
      *
-     * @return SortInterface[]
+     * @return SortableInterface
      */
-    public function getSorting();
+    public function getSortable();
 }

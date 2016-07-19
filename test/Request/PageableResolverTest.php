@@ -20,7 +20,7 @@ class PageableResolverTest extends AbstractResolverTest
      */
     public function before()
     {
-        $this->resolver = new PageableResolver(new PageableRequest($this->defaultPage, $this->defaultSize), new SortResolver(), $this->parameterPage, $this->parameterSize);
+        $this->resolver = new PageableResolver(new PageableRequest($this->defaultPage, $this->defaultSize), new SortableResolver(new SortResolver()), $this->parameterPage, $this->parameterSize);
     }
 
     /**

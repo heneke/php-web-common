@@ -15,11 +15,11 @@ class LimitOffsetRequest implements LimitOffsetInterface
     private $limit;
 
     /**
-     * @var SortInterface[]
+     * @var SortableInterface
      */
-    private $sorting;
+    private $sortable;
 
-    public function __construct($limit, $offset, $sorting = [])
+    public function __construct($limit, $offset, SortableInterface $sortable = null)
     {
         if ($limit === null || $limit < 1) {
             throw new \InvalidArgumentException('Limit must be greater or equal to 1!');
@@ -30,7 +30,7 @@ class LimitOffsetRequest implements LimitOffsetInterface
 
         $this->limit = intval($limit);
         $this->offset = intval($offset);
-        $this->sorting = $sorting == null ? [] : $sorting;
+        $this->sortable = $sortable == null ? new SortableRequest() : $sortable;
     }
 
     /**
@@ -52,8 +52,8 @@ class LimitOffsetRequest implements LimitOffsetInterface
     /**
      * @inheritdoc
      */
-    public function getSorting()
+    public function getSortable()
     {
-        return $this->sorting;
+        return $this->sortable;
     }
 }

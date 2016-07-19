@@ -15,11 +15,11 @@ class PageableRequest implements PageableInterface
     private $pageSize;
 
     /**
-     * @var SortInterface[]
+     * @var SortableInterface
      */
-    private $sorting;
+    private $sortable;
 
-    public function __construct($pageNumber, $pageSize, array $sorting = [])
+    public function __construct($pageNumber, $pageSize, SortableInterface $sortable = null)
     {
         if ($pageNumber < 1) {
             throw new \InvalidArgumentException('Page number may not be lower than 1!');
@@ -29,7 +29,7 @@ class PageableRequest implements PageableInterface
         }
         $this->pageNumber = intval($pageNumber);
         $this->pageSize = intval($pageSize);
-        $this->sorting = $sorting == null ? [] : $sorting;
+        $this->sortable = $sortable == null ? new SortableRequest() : $sortable;
     }
 
     /**
@@ -76,8 +76,8 @@ class PageableRequest implements PageableInterface
     /**
      * @inheritdoc
      */
-    public function getSorting()
+    public function getSortable()
     {
-        return $this->sorting;
+        return $this->sortable;
     }
 }

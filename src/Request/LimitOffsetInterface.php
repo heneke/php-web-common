@@ -19,7 +19,7 @@ interface LimitOffsetInterface
     public function getOffset();
 
     /**
-     * @return SortInterface[]
+     * @return SortableInterface
      */
-    public function getSorting();
+    public function getSortable();
 }

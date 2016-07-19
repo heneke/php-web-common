@@ -20,7 +20,7 @@ class LimitOffsetResolverTest extends AbstractResolverTest
      */
     public function before()
     {
-        $this->resolver = new LimitOffsetResolver(new LimitOffsetRequest($this->defaultLimit, $this->defaultOffset), new SortResolver(), $this->parameterLimit, $this->parameterOffset);
+        $this->resolver = new LimitOffsetResolver(new LimitOffsetRequest($this->defaultLimit, $this->defaultOffset), new SortableResolver(new SortResolver()), $this->parameterLimit, $this->parameterOffset);
     }
 
     /**
