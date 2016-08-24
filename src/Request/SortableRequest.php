@@ -1,7 +1,7 @@
 <?php
 namespace Heneke\Web\Common\Request;
 
-class SortableRequest implements SortableInterface
+class SortableRequest implements SortableInterface, \JsonSerializable
 {
 
     /**
@@ -20,5 +20,10 @@ class SortableRequest implements SortableInterface
     public function getSorting()
     {
         return $this->sorting;
+    }
+
+    public function jsonSerialize()
+    {
+        return ['sorting' => $this->sorting];
     }
 }
