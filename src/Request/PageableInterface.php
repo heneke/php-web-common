@@ -28,7 +28,7 @@ interface PageableInterface
     /**
      * Returns the next pageable
      *
-     * @return mixed
+     * @return PageableInterface
      */
     public function next();
 
