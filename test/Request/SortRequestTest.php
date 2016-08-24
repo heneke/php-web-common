@@ -100,4 +100,12 @@ class SortRequestTest extends \PHPUnit_Framework_TestCase
     {
         SortRequest::fromString('A B C');
     }
+
+    /**
+     * @test
+     */
+    public function json()
+    {
+        $this->assertEquals('{"direction":"ASC","property":"prop"}', json_encode(new SortRequest('prop', SortInterface::DIR_ASC)));
+    }
 }
