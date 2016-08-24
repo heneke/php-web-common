@@ -35,4 +35,12 @@ class PageableRequestTest extends \PHPUnit_Framework_TestCase
             [10, 1, 9],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function json()
+    {
+        $this->assertEquals('{"pageNumber":1,"pageSize":10,"sortable":{"sorting":[]}}', json_encode(new PageableRequest(1, 10)));
+    }
 }

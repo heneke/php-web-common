@@ -1,7 +1,7 @@
 <?php
 namespace Heneke\Web\Common\Request;
 
-class PageableRequest implements PageableInterface
+class PageableRequest implements PageableInterface, \JsonSerializable
 {
 
     /**
@@ -79,5 +79,10 @@ class PageableRequest implements PageableInterface
     public function getSortable()
     {
         return $this->sortable;
+    }
+
+    public function jsonSerialize()
+    {
+        return ['pageNumber' => intval($this->getPageNumber()), 'pageSize' => intval($this->getPageSize()), 'sortable' => $this->getSortable()];
     }
 }
