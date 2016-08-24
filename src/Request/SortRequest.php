@@ -1,7 +1,7 @@
 <?php
 namespace Heneke\Web\Common\Request;
 
-class SortRequest# implements SortInterface
+class SortRequest implements SortInterface
 {
 
     /**
