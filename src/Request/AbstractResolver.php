@@ -8,9 +8,11 @@ abstract class AbstractResolver
 
     protected function resolveParameterValue($parameter, ServerRequestInterface $serverRequest)
     {
+        // @codeCoverageIgnoreStart
         if (!$parameter) {
             throw new \InvalidArgumentException('Parameter required!');
         }
+        // @codeCoverageIgnoreEnd
 
         if ($serverRequest->getQueryParams() != null && array_key_exists($parameter, $serverRequest->getQueryParams())) {
             return $serverRequest->getQueryParams()[$parameter];
