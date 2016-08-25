@@ -55,13 +55,9 @@ class LimitOffsetResolver extends AbstractResolver
     public function resolve(ServerRequestInterface $serverRequest)
     {
         $limit = $this->resolveParameterValue($this->parameterLimit, $serverRequest);
-        if (is_array($limit)) {
-            throw new BadRequestException("Parameter '{$this->parameterLimit}' only supports scalar values!");
-        }
+        $this->validateValue($limit, $this->parameterLimit);
         $offset = $this->resolveParameterValue($this->parameterOffset, $serverRequest);
-        if (is_array($offset)) {
-            throw new BadRequestException("Parameter '{$this->parameterOffset}' only supports scalar values!");
-        }
+        $this->validateValue($offset, $this->parameterOffset);
 
         $sortable = $this->sortableResolver->resolveSilently($serverRequest);
         return new LimitOffsetRequest($limit, $offset, $sortable);
@@ -77,21 +73,24 @@ class LimitOffsetResolver extends AbstractResolver
     public function resolveWithDefault(ServerRequestInterface $serverRequest)
     {
         $limit = $this->resolveParameterValueSilently($this->parameterLimit, $serverRequest);
-        if (is_array($limit)) {
-            throw new BadRequestException("Parameter '{$this->parameterLimit}' only supports scalar values!");
-        }
+        $this->validateValue($limit, $this->parameterLimit);
         if ($limit === null) {
             $limit = $this->default->getLimit();
         }
         $offset = $this->resolveParameterValueSilently($this->parameterOffset, $serverRequest);
-        if (is_array($offset)) {
-            throw new BadRequestException("Parameter '{$this->parameterOffset}' only supports scalar values!");
-        }
+        $this->validateValue($offset, $this->parameterOffset);
         if ($offset === null) {
             $offset = $this->default->getOffset();
         }
 
         $sortable = $this->sortableResolver->resolveSilently($serverRequest);
         return new LimitOffsetRequest($limit, $offset, $sortable);
+    }
+
+    private function validateValue($value, $parameter)
+    {
+        if (is_array($value)) {
+            throw new BadRequestException("Parameter '{$parameter}' only supports scalar values!");
+        }
     }
 }

@@ -68,4 +68,54 @@ class LimitOffsetResolverTest extends AbstractResolverTest
         $this->assertEquals($limit, $lo->getLimit());
         $this->assertEquals($this->defaultOffset, $lo->getOffset());
     }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter for limit
+     */
+    public function createInvalidParameterLimit()
+    {
+        new LimitOffsetResolver(new LimitOffsetRequest(10, 0), new SortableResolver(new SortResolver()), '', 'offset');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter for offset
+     */
+    public function createInvalidParameterOffset()
+    {
+        new LimitOffsetResolver(new LimitOffsetRequest(10, 0), new SortableResolver(new SortResolver()), 'limit', '');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Different parameters
+     */
+    public function createInvalidParameters()
+    {
+        new LimitOffsetResolver(new LimitOffsetRequest(10, 0), new SortableResolver(new SortResolver()), 'x', 'x');
+    }
+
+    /**
+     * @test
+     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedExceptionMessage Parameter 'l' only supports
+     */
+    public function nonScalarLimit()
+    {
+        $this->resolver->resolve($this->createServerRequest('GET', [$this->parameterLimit => [1, 2], $this->parameterOffset => 10]));
+    }
+
+    /**
+     * @test
+     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedExceptionMessage Parameter 'o' only supports
+     */
+    public function nonScalarOffset()
+    {
+        $this->resolver->resolve($this->createServerRequest('GET', [$this->parameterLimit => 10, $this->parameterOffset => [1, 2]]));
+    }
 }
