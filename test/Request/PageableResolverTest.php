@@ -59,6 +59,7 @@ class PageableResolverTest extends AbstractResolverTest
     /**
      * @test
      * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedExceptionMessage Parameter 'p' only supports
      */
     public function resolveArrayValue()
     {
@@ -70,6 +71,7 @@ class PageableResolverTest extends AbstractResolverTest
     /**
      * @test
      * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedExceptionMessage Parameter 'p' only supports
      */
     public function resolveWithDefaultArrayValue()
     {
@@ -100,5 +102,35 @@ class PageableResolverTest extends AbstractResolverTest
         $this->assertNotNull($pageable);
         $this->assertEquals($page, $pageable->getPageNumber());
         $this->assertEquals($this->defaultSize, $pageable->getPageSize());
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter for page
+     */
+    public function createInvalidParameterPage()
+    {
+        new PageableResolver(new PageableRequest(1, 10), new SortableResolver(new SortResolver()), '', 'size');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter for size
+     */
+    public function createInvalidParameterSize()
+    {
+        new PageableResolver(new PageableRequest(1, 10), new SortableResolver(new SortResolver()), 'page', '');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Different parameters
+     */
+    public function createInvalidParameters()
+    {
+        new PageableResolver(new PageableRequest(1, 10), new SortableResolver(new SortResolver()), 'x', 'x');
     }
 }
