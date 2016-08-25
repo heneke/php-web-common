@@ -31,4 +31,11 @@ abstract class AbstractResolver
             return null;
         }
     }
+
+    protected function validateIsScalar($value, $parameter)
+    {
+        if (is_array($value)) {
+            throw new BadRequestException("Parameter '{$parameter}' only supports scalar values!");
+        }
+    }
 }

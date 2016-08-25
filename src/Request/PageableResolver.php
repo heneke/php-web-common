@@ -56,13 +56,9 @@ class PageableResolver extends AbstractResolver
     public function resolve(ServerRequestInterface $serverRequest)
     {
         $page = $this->resolveParameterValue($this->parameterPage, $serverRequest);
-        if (is_array($page)) {
-            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
-        }
+        $this->validateIsScalar($page, $this->parameterPage);
         $size = $this->resolveParameterValue($this->parameterSize, $serverRequest);
-        if (is_array($size)) {
-            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
-        }
+        $this->validateIsScalar($size, $this->parameterSize);
 
         $sortable = $this->sortableResolver->resolveSilently($serverRequest);
 
@@ -79,16 +75,12 @@ class PageableResolver extends AbstractResolver
     public function resolveWithDefault(ServerRequestInterface $serverRequest)
     {
         $page = $this->resolveParameterValueSilently($this->parameterPage, $serverRequest);
-        if (is_array($page)) {
-            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
-        }
+        $this->validateIsScalar($page, $this->parameterPage);
         if($page === null) {
             $page = $this->default->getPageNumber();
         }
         $size = $this->resolveParameterValueSilently($this->parameterSize, $serverRequest);
-        if (is_array($size)) {
-            throw new BadRequestException("Parameter '{$this->parameterSize}' only supports scalar values!");
-        }
+        $this->validateIsScalar($size, $this->parameterSize);
         if($size === null) {
             $size = $this->default->getPageSize();
         }

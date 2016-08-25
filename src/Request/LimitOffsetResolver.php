@@ -55,9 +55,9 @@ class LimitOffsetResolver extends AbstractResolver
     public function resolve(ServerRequestInterface $serverRequest)
     {
         $limit = $this->resolveParameterValue($this->parameterLimit, $serverRequest);
-        $this->validateValue($limit, $this->parameterLimit);
+        $this->validateIsScalar($limit, $this->parameterLimit);
         $offset = $this->resolveParameterValue($this->parameterOffset, $serverRequest);
-        $this->validateValue($offset, $this->parameterOffset);
+        $this->validateIsScalar($offset, $this->parameterOffset);
 
         $sortable = $this->sortableResolver->resolveSilently($serverRequest);
         return new LimitOffsetRequest($limit, $offset, $sortable);
@@ -73,24 +73,17 @@ class LimitOffsetResolver extends AbstractResolver
     public function resolveWithDefault(ServerRequestInterface $serverRequest)
     {
         $limit = $this->resolveParameterValueSilently($this->parameterLimit, $serverRequest);
-        $this->validateValue($limit, $this->parameterLimit);
+        $this->validateIsScalar($limit, $this->parameterLimit);
         if ($limit === null) {
             $limit = $this->default->getLimit();
         }
         $offset = $this->resolveParameterValueSilently($this->parameterOffset, $serverRequest);
-        $this->validateValue($offset, $this->parameterOffset);
+        $this->validateIsScalar($offset, $this->parameterOffset);
         if ($offset === null) {
             $offset = $this->default->getOffset();
         }
 
         $sortable = $this->sortableResolver->resolveSilently($serverRequest);
         return new LimitOffsetRequest($limit, $offset, $sortable);
-    }
-
-    private function validateValue($value, $parameter)
-    {
-        if (is_array($value)) {
-            throw new BadRequestException("Parameter '{$parameter}' only supports scalar values!");
-        }
     }
 }
