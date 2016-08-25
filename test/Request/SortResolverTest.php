@@ -102,4 +102,14 @@ class SortResolverTest extends AbstractResolverTest
         $this->assertTrue(is_array($sorts));
         $this->assertCount(0, $sorts);
     }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter required
+     */
+    public function createInvalidParameter()
+    {
+        new SortResolver('');
+    }
 }
