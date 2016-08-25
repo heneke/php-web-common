@@ -22,9 +22,9 @@ class PageableRequest implements PageableInterface, \JsonSerializable
     public function __construct($pageNumber, $pageSize, SortableInterface $sortable = null)
     {
         if ($pageNumber < 1) {
-            throw new \InvalidArgumentException('Page number may not be lower than 1!');
+            throw new \InvalidArgumentException('Page number mus be greater than 0!');
         }
-        if ($pageSize <= 0) {
+        if ($pageSize < 1) {
             throw new \InvalidArgumentException('Page size must be greater than 0!');
         }
         $this->pageNumber = intval($pageNumber);
