@@ -53,4 +53,16 @@ class LimitOffsetRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(77, $lo->getLimit());
         $this->assertEquals(88, $lo->getOffset());
     }
+
+    /**
+     * @test
+     */
+    public function sortable()
+    {
+        $lo = new LimitOffsetRequest(1, 0, new SortableRequest([new SortRequest('prop', SortInterface::DIR_DESC)]));
+        $this->assertNotNull($lo->getSortable());
+        $s = $lo->getSortable()->getSorting()[0];
+        $this->assertEquals('prop', $s->getProperty());
+        $this->assertEquals(SortInterface::DIR_DESC, $s->getDirection());
+    }
 }
