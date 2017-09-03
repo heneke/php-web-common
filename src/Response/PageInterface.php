@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Response;
+namespace HHIT\Web\Common\Response;
 
 interface PageInterface
 {

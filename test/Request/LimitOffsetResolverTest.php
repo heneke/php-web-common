@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request;
+namespace HHIT\Web\Common\Request;
 
 class LimitOffsetResolverTest extends AbstractResolverTest
 {
@@ -38,7 +38,7 @@ class LimitOffsetResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\UnresolvableException
+     * @expectedException \HHIT\Web\Common\Request\UnresolvableException
      */
     public function unresolvable()
     {
@@ -101,7 +101,7 @@ class LimitOffsetResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedException \HHIT\Web\Common\Request\BadRequestException
      * @expectedExceptionMessage Parameter 'l' only supports
      */
     public function nonScalarLimit()
@@ -111,7 +111,7 @@ class LimitOffsetResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedException \HHIT\Web\Common\Request\BadRequestException
      * @expectedExceptionMessage Parameter 'o' only supports
      */
     public function nonScalarOffset()

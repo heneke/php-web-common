@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request;
+namespace HHIT\Web\Common\Request;
 
 interface LimitOffsetInterface
 {

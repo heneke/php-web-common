@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request;
+namespace HHIT\Web\Common\Request;
 
 class SortRequestTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request;
+namespace HHIT\Web\Common\Request;
 
 class PageableResolverTest extends AbstractResolverTest
 {
@@ -25,7 +25,7 @@ class PageableResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\UnresolvableException
+     * @expectedException \HHIT\Web\Common\Request\UnresolvableException
      */
     public function unresolveable()
     {
@@ -58,7 +58,7 @@ class PageableResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedException \HHIT\Web\Common\Request\BadRequestException
      * @expectedExceptionMessage Parameter 'p' only supports
      */
     public function resolveArrayValue()
@@ -70,7 +70,7 @@ class PageableResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\BadRequestException
+     * @expectedException \HHIT\Web\Common\Request\BadRequestException
      * @expectedExceptionMessage Parameter 'p' only supports
      */
     public function resolveWithDefaultArrayValue()

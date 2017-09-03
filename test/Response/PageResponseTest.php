@@ -1,10 +1,10 @@
 <?php
-namespace Heneke\Web\Common\Response;
+namespace HHIT\Web\Common\Response;
 
-use Heneke\Web\Common\Request\PageableRequest;
-use Heneke\Web\Common\Request\SortableRequest;
-use Heneke\Web\Common\Request\SortInterface;
-use Heneke\Web\Common\Request\SortRequest;
+use HHIT\Web\Common\Request\PageableRequest;
+use HHIT\Web\Common\Request\SortableRequest;
+use HHIT\Web\Common\Request\SortInterface;
+use HHIT\Web\Common\Request\SortRequest;
 
 class PageResponseTest extends \PHPUnit_Framework_TestCase
 {

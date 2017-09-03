@@ -1,5 +1,5 @@
 <?php
-namespace Heneke\Web\Common\Request;
+namespace HHIT\Web\Common\Request;
 
 class SortResolverTest extends AbstractResolverTest
 {
@@ -21,7 +21,7 @@ class SortResolverTest extends AbstractResolverTest
 
     /**
      * @test
-     * @expectedException \Heneke\Web\Common\Request\UnresolvableException
+     * @expectedException \HHIT\Web\Common\Request\UnresolvableException
      * @expectedExceptionMessage Request does not contain
      */
     public function unresolvable()
