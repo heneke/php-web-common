@@ -1,5 +1,5 @@
 {
-  "name": "heneke/web-common",
+  "name": "hhit/web-common",
   "description": "Common web request utilities",
   "type": "library",
   "require": {
